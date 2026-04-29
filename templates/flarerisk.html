@@ -7,7 +7,7 @@
     </div>
 </div>
 <div class = "row flarerisk">
-    <div class="col-12">
+    <div class="col">
         <h1> {% if risk_level == "High" %} 
             <span style="color: red;">High</span> 
             {% elif risk_level == "Medium" %} 
@@ -19,11 +19,11 @@
     </div>
 </div>
 <div class="row flarequest">
-    <div class="col-12 text-center">
+    <div class="col text-center">
         <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#revealText"> How Can I Reduce This? </button>
         <div class="collapse mt-3 text-center" id="revealText"> 
             <div class="card card-body"> 
-                Prioritise Rest
+                Prioritise Rest and Be Kind to Yourself!
             </div> 
         </div>
     </div>
@@ -60,4 +60,15 @@
         </ul>
     </div>
 </div>
+<br>
+<div class="row text-center">
+    <div class="col">
+        <h4><a href="{{ url_for('routes.edit_activities') }}" class="editact" id="flareriskact">Manually Edit Activity Levels</a></h4>
+    </div>
+    <div class="col">
+        <a href="{{ url_for('routes.home') }}" class="homebtn">Home</a>
+    </div>
+</div>
+<br>
+<br>
 {% endblock %}

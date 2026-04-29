@@ -46,11 +46,13 @@ li {
     background-color: navy;
     color: lightblue;
 }
-#dashactivity {
+#dashactivity,
+#acctactdiff {
     background-color: violet;
     color: navy;
 }
-#dashhist {
+#dashhist,
+#history {
     background-color: purple;
     color: lightblue;
 }
@@ -113,10 +115,6 @@ li {
     text-align: center;
 }
 .accbtn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     padding: 20px;
     background-color: pink;
     text-decoration: none;
@@ -231,20 +229,31 @@ li {
     display: flex;
     justify-content: center;
 }
-.mainedit {
-    background-color: #56144D;
-    color: lightblue;
-    text-decoration: none;
-    text-align: center;
-    height: 75px;
-    width: 25%;
-    border-radius: 10px;
-    padding-top: 10px;
-}
+
 .editact {
+    background-color: #56144D;
     color: lightblue;
     font-weight: 800;
     font-size: 32px;
     text-decoration: none;
-    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+}
+#logout {
+    background-color: red;
+    opacity: 70%;
+    color: white;
+}
+#flareriskact {
+    font-weight: 500;
+    font-size: 28px;
+}
+.homebtn {
+    font-weight: 500;
+    font-size: 28px;
+    text-decoration: none;
+    background-color: darkred;
+    color: lightblue;
+    border-radius: 10px;
+    padding: 20px;
 }

@@ -23,19 +23,20 @@
         <h2>{{ current_user.email }}</h2>
     </div>
 </div>
-<div class="row">
-    <div class="col text-center">
-        <a href="" class="accbtn" id="logout">Logout</a>
+<br>
+<div class="row text-center">
+    <div class="col">
+        <h4><a href="" class="accbtn" id="logout">Logout</a></h4>
     </div>
-    <div class="col text-center">
-        <a href="{{ url_for('routes.history') }}" class="accbtn" id="history">View History</a>
+    <div class="col">
+        <h4><a href="{{ url_for('routes.history') }}" class="accbtn" id="history">View History</a></h4>
     </div>
-
-<div class="row">
-    <div class="col-12 text-center">
-        <a href="{{ url_for('routes.activity_recommendations') }}" class="accbtn">View Current Activity Difficulties</a>
+</div>
+<br>
+<br>
+<div class="row text-center">
+    <div class="col">
+        <h4><a href="{{ url_for('routes.activity_recommendations') }}" class="accbtn" id="acctactdiff">View Current Activity Difficulties</a></h4>
     </div>
 </div>
 {% endblock %}
-
-</div>

@@ -1,3 +1,5 @@
 migrations/*
 templates/placeholder.html
 flareriskdebug.py
+.vscode/launch.json
+.env

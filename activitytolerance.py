@@ -44,9 +44,6 @@ def get_activity_recommendations(user_id):
         else:
             avoid_list.append(activity)
 
-    #Resting always allowed
-    do_list.append("Resting")
-
     return {
         "do": do_list,
         "careful": careful_list,

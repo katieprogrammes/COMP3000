@@ -21,6 +21,11 @@ def home():
     
     return render_template('home.html', title='Home')
 
+@bp.route ('/resources')
+def resources():
+    
+    return render_template('resources.html', title='Resources')
+
 #Flare Risk
 @bp.route('/flarerisk')
 @login_required
@@ -455,7 +460,32 @@ def edit_activities():
 
     return render_template('editreginfo.html', form=form, title='Change Activity Difficulty')
 
+@bp.route('/journal', methods=['GET', 'POST'])
+@login_required
+def journal():
+    form = JournalForm()
 
+    if request.method == "POST":
+        # Validation
+        if form.validate():
+            journal_entry = Journal(
+                user_id=current_user.id,
+                date=form.date.data,
+                mood=Mood(form.mood.data),
+                notes=form.notes.data
+            )
+
+            # Save to DB
+            db.session.add(journal_entry)
+            db.session.commit()
+
+            flash('Journal entry saved successfully', 'success')
+            return redirect(url_for("routes.home"))
+
+        else:
+            flash('Please correct the errors in the form', 'error')
+
+    return render_template('editreginfo.html', form=form, title='Journal')
 
 #PLACEHOLDER ROUTE
 @bp.route ('/placeholder')

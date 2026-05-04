@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from wtforms.validators import ValidationError
 from sqlalchemy.dialects.sqlite import JSON
+import enum
 
 #User Table
 class User(db.Model, UserMixin):
@@ -183,7 +184,22 @@ class DailyRecommendation(db.Model):
     avoid: so.Mapped[list] = so.mapped_column(JSON, nullable=False)
     user: so.Mapped["User"] = so.relationship("User", backref="daily_recommendations")
 
+class Mood(enum.Enum):
+    happy = "happy"
+    calm = "calm"
+    sad = "sad"
+    angry = "angry"
+    anxious = "anxious"
+    upset = "upset"
+    depressed = "depressed"
+    neutral = "neutral"
 
+class Journal(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
+    date: so.Mapped[datetime.date] = so.mapped_column(sa.Date, default=datetime.date.today)
+    mood: so.Mapped[Mood] = so.mapped_column(sa.Enum(Mood), nullable=False)
+    notes: so.Mapped[str] = so.mapped_column(sa.Text, nullable=False)
 
 
 

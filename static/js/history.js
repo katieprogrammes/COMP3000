@@ -176,77 +176,88 @@ document.addEventListener('DOMContentLoaded', function () {
                     {
                         label: 'Fatigue',
                         data: symptomData.map(log => log.fatigue),
-                        borderColor: '#f59e0b',
+                        borderColor: '#8b5cf6',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
                         label: 'Stiffness',
                         data: symptomData.map(log => log.stiffness),
-                        borderColor: '#3b82f6',
+                        borderColor: '#02bd08',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'Sleep Quality',
+                        label: 'Poor Sleep Quality',
                         data: symptomData.map(log => log.sleepquality),
-                        borderColor: '#030538',
+                        borderColor: '#0502bd',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
                         label: 'Fibro Fog',
                         data: symptomData.map(log => log.fibrofog),
-                        borderColor: '#030538',
+                        borderColor: '#3d2116',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'Headache',
+                        label: 'Headaches/Migraines',
                         data: symptomData.map(log => log.headache),
-                        borderColor: '#030538',
+                        borderColor: '#9402bd',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
                         label: 'IBS',
                         data: symptomData.map(log => log.ibs),
-                        borderColor: '#030538',
+                        borderColor: '#7d7b01',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
                         label: 'Dizziness',
                         data: symptomData.map(log => log.dizziness),
-                        borderColor: '#030538',
+                        borderColor: '#bd6f02',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'Body Temp',
+                        label: 'Bad Body Temperature Regulation',
                         data: symptomData.map(log => log.bodytemp),
-                        borderColor: '#030538',
+                        borderColor: '#666666',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'Paraesthesia',
+                        label: 'Touch Sensitivity',
                         data: symptomData.map(log => log.paraesthesia),
-                        borderColor: '#030538',
+                        borderColor: '#bd027e',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
                         label: 'Allodynia',
                         data: symptomData.map(log => log.allodynia),
-                        borderColor: '#030538',
+                        borderColor: '#ad0516',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'Lightsens',
+                        label: 'Light Sensitivity',
                         data: symptomData.map(log => log.lightsens),
-                        borderColor: '#030538',
+                        borderColor: '#918151',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
@@ -254,13 +265,15 @@ document.addEventListener('DOMContentLoaded', function () {
                         label: 'Depression',
                         data: symptomData.map(log => log.depression),
                         borderColor: '#030538',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
                         label: 'Anxiety',
                         data: symptomData.map(log => log.anxiety),
-                        borderColor: '#030538',
+                        borderColor: '#035416',
+                        hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     }
@@ -278,7 +291,19 @@ document.addEventListener('DOMContentLoaded', function () {
                             },
                             color: '#000000',
                             boxWidth: 20,
-                            padding: 20
+                            padding: 20,
+                            
+                            generateLabels: function(chart) {
+                                const labels =
+                                    Chart.defaults.plugins.legend.labels.generateLabels(chart);
+
+                                labels.forEach(label => {
+                                    label.fillStyle = label.strokeStyle;
+                                });
+
+                                return labels;
+                            }
+                            
                         }
                     }
                 },

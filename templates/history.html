@@ -110,54 +110,74 @@
                     <h5>BTR = Body Temperature Regulation</h5>
                     <h5>H-pain = Headaches / Migraines</h5>
 
-                    <div class="table-responsive mt-3">
-                        <table class="table table-striped table-bordered table-sm historytable">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>Fatigue</th>
-                                    <th>Stiffness</th>
-                                    <th>Sleep</th>
-                                    <th>Fibro Fog</th>
-                                    <th>H-Pain</th>
-                                    <th>IBS</th>
-                                    <th>Dizziness</th>
-                                    <th>BTR</th>
-                                    <th>Touch Sensitivity</th>
-                                    <th>Allodynia</th>
-                                    <th>Light Sensitivity</th>
-                                    <th>Depression</th>
-                                    <th>Anxiety</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for log in combined_symptom_logs %}
-                                <tr>
-                                    <td>{{ log.date.strftime("%d-%m") }}</td>
-                                    <td>{{ log.time }}</td>
-                                    <td class="pain-cell level-{{ log.fatigue }}">{{ log.fatigue }}</td>
-                                    <td class="pain-cell level-{{ log.stiffness }}">{{ log.stiffness }}</td>
-                                    <td class="pain-cell level-{{ log.sleepquality }}">{{ log.sleepquality }}</td>
-                                    <td class="pain-cell level-{{ log.fibrofog }}">{{ log.fibrofog }}</td>
-                                    <td class="pain-cell level-{{ log.headache }}">{{ log.headache }}</td>
-                                    <td class="pain-cell level-{{ log.ibs }}">{{ log.ibs }}</td>
-                                    <td class="pain-cell level-{{ log.dizziness }}">{{ log.dizziness }}</td>
-                                    <td class="pain-cell level-{{ log.bodytemp }}">{{ log.bodytemp }}</td>
-                                    <td class="pain-cell level-{{ log.paraesthesia }}">{{ log.paraesthesia }}</td>
-                                    <td class="pain-cell level-{{ log.allodynia }}">{{ log.allodynia }}</td>
-                                    <td class="pain-cell level-{{ log.lightsens }}">{{ log.lightsens }}</td>
-                                    <td class="pain-cell level-{{ log.depression }}">{{ log.depression }}</td>
-                                    <td class="pain-cell level-{{ log.anxiety }}">{{ log.anxiety }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        <div class="mt-4">
-                            <canvas id="symptomChart"></canvas>
+                    <div class="text-center">
+                        <button class="btn tableshow"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#symptomTableContainer">
+                            Show Table
+                        </button>
+
+                        <button class="btn graphshow"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#symptomChartContainer">
+                            Show Graph
+                        </button>
+                    </div>
+
+                    <div class="collapse" id="symptomTableContainer">
+                        <div class="table-responsive mt-3">
+                            <table class="table table-striped table-bordered table-sm historytable">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Fatigue</th>
+                                        <th>Stiffness</th>
+                                        <th>Sleep</th>
+                                        <th>Fibro Fog</th>
+                                        <th>H-Pain</th>
+                                        <th>IBS</th>
+                                        <th>Dizziness</th>
+                                        <th>BTR</th>
+                                        <th>Touch Sensitivity</th>
+                                        <th>Allodynia</th>
+                                        <th>Light Sensitivity</th>
+                                        <th>Depression</th>
+                                        <th>Anxiety</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for log in combined_symptom_logs %}
+                                    <tr>
+                                        <td>{{ log.date.strftime("%d-%m") }}</td>
+                                        <td>{{ log.time }}</td>
+                                        <td class="pain-cell level-{{ log.fatigue }}">{{ log.fatigue }}</td>
+                                        <td class="pain-cell level-{{ log.stiffness }}">{{ log.stiffness }}</td>
+                                        <td class="pain-cell level-{{ log.sleepquality }}">{{ log.sleepquality }}</td>
+                                        <td class="pain-cell level-{{ log.fibrofog }}">{{ log.fibrofog }}</td>
+                                        <td class="pain-cell level-{{ log.headache }}">{{ log.headache }}</td>
+                                        <td class="pain-cell level-{{ log.ibs }}">{{ log.ibs }}</td>
+                                        <td class="pain-cell level-{{ log.dizziness }}">{{ log.dizziness }}</td>
+                                        <td class="pain-cell level-{{ log.bodytemp }}">{{ log.bodytemp }}</td>
+                                        <td class="pain-cell level-{{ log.paraesthesia }}">{{ log.paraesthesia }}</td>
+                                        <td class="pain-cell level-{{ log.allodynia }}">{{ log.allodynia }}</td>
+                                        <td class="pain-cell level-{{ log.lightsens }}">{{ log.lightsens }}</td>
+                                        <td class="pain-cell level-{{ log.depression }}">{{ log.depression }}</td>
+                                        <td class="pain-cell level-{{ log.anxiety }}">{{ log.anxiety }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
+
+                    <div class="collapse" id="symptomChartContainer">
+                        <h4 class="text-center">Click the items below to show or hide them</h4>
+                        <canvas id="symptomChart"></canvas>
+                    </div>
                 </div>
+
+
 
                 <!--Activities Section-->
                 <div class="tab-pane fade" id="activities" role="tabpanel">
@@ -228,32 +248,35 @@ const painData = [
         arms: {{ log.arms }},
         elbows: {{ log.elbows }},
         legs: {{ log.legs }},
-        knees: {{ log.knees }},
+        knees: {{ log.knees }}
     },
     {% endfor %}
 ];
 </script>
 <script>
-const symptomData = [
+var symptomData = [
     {% for log in combined_symptom_logs %}
     {
         date: "{{ log.date.strftime('%d-%m') }}",
-        fatigue: {{ log.fatigue }},
-        stiffness: {{ log.stiffness }},
-        sleepquality: {{ log.sleepquality }},
-        fibrofog: {{ log.fibrofog }},
-        headache: {{ log.headache }},
-        ibs: {{ log.ibs }},
-        dizziness: {{ log.dizziness }},
-        bodytemp: {{ log.bodytemp }},
-        paraesthesia: {{ log.paraesthesia }},
-        allodynia: {{ log.allodynia }},
-        lightsens: {{ log.lightsens }},
-        depression: {{ log.depression }},
-        anxiety: {{ log.anxiety }},
+        fatigue: {{ log.fatigue or 0 }},
+        stiffness: {{ log.stiffness or 0 }},
+        sleepquality: {{ log.sleepquality or 0 }},
+        fibrofog: {{ log.fibrofog or 0 }},
+        headache: {{ log.headache or 0 }},
+        ibs: {{ log.ibs or 0 }},
+        dizziness: {{ log.dizziness or 0 }},
+        bodytemp: {{ log.bodytemp or 0 }},
+        paraesthesia: {{ log.paraesthesia or 0 }},
+        allodynia: {{ log.allodynia or 0 }},
+        lightsens: {{ log.lightsens or 0 }},
+        depression: {{ log.depression or 0 }},
+        anxiety: {{ log.anxiety or 0 }}
     },
     {% endfor %}
 ];
+
+console.log(symptomData);
 </script>
+
 <script src="{{ url_for('static', filename='js/history.js') }}"></script>
 {% endblock %}

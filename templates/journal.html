@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <h1 class="title">Journal</h1>
+</div>
+<div class="row">
+    <div class="col-12 text-center">
+        <h1 class="title">Journal</h1>
+        <h2 class="subtitle">How are you feeling today?</h2>
+        <h4 class="subheading">Select a mood and add any notes you'd like to record</h4>
+    </div>
+</div>
+<div class="row">
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <!-- DATE -->
+        <div class="mb-3">
+            <h5>
+                {{ form.date.label(class="form-label") }}
+                {{ form.date(class="form-control") }}
+            </h5>
+        </div>
+        <!-- MOOD BUTTONS -->
+        <div class="mb-3">
+            <h5><label class="form-label">{{ form.mood.label }}</label></h5>
+
+            <div class="btn-group" role="group">
+                {% for subfield in form.mood %}
+                    {{ subfield(class="btn-check") }}
+                    <label class="btn btn-outline-primary" for="{{ subfield.id }}">
+                        {{ subfield.label.text }}
+                    </label>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- NOTES -->
+        <div class="mb-3">
+            <h5>
+                {{ form.notes.label(class="form-label") }}
+            </h5>
+            {{ form.notes(class="form-control", rows="5", placeholder="Write anything you want to remember...") }}
+        </div>
+        <!-- SUBMIT -->
+        <button type="submit" class="btn btn-primary">Save Journal Entry</button>
+    </form>
+</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}

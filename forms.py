@@ -95,4 +95,20 @@ class ActivityPriorityForm(FlaskForm):
     studying = BooleanField("Studying")
     submit = SubmitField("Submit")
 
+class JournalForm(FlaskForm):
+    date = DateField('Date: ', format='%Y-%m-%d')
 
+    mood = RadioField(
+        'Mood: ',
+        choices=[
+            ('happy', 'Happy'),
+            ('calm', 'Calm'),
+            ('sad', 'Sad'),
+            ('angry', 'Angry'),
+            ('upset', 'Upset'),
+            ('depressed', 'Low / Depressed'),
+            ('neutral', 'Netural'),
+        ]
+    )
+    notes = TextAreaField('Notes')
+    submit = SubmitField('Submit')

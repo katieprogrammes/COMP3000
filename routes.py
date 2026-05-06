@@ -4,8 +4,8 @@ from flask_login import current_user, login_user, login_required, logout_user
 from flarerisk import get_flarerisk_for_user
 from activitytolerance import get_activity_recommendations
 from activityreccs import apply_flare_weighting
-from models import User, PainAM, SymptomsAM, PainPM, SymptomsPM, Activity, InitialActivity, ActivityPriority, DailyRecommendation, Journal, Mood
-from forms import RegistrationForm, LoginForm, PainForm, SymptomsForm, InitialActivityForm, ActivityForm, ActivityPriorityForm, JournalForm
+from models import User, PainAM, SymptomsAM, PainPM, SymptomsPM, Activity, InitialActivity, ActivityPriority, DailyRecommendation, Journal, Mood, ActiveFlare
+from forms import RegistrationForm, LoginForm, PainForm, SymptomsForm, InitialActivityForm, ActivityForm, ActivityPriorityForm, JournalForm, ActiveFlareForm
 from extenstions import db, login_manager
 import sqlalchemy as sa
 
@@ -313,7 +313,7 @@ def logAM():
             db.session.commit()
 
         flash('Record saved successfully', 'success')
-        return redirect(url_for("routes.home"))
+        return redirect(url_for("routes.flarerisk"))
     return render_template('logAM.html', title='Morning Log', form1=form1, form2=form2, form3=form3)
 
 @bp.route ('/logPM', methods=['GET', 'POST'])
@@ -373,6 +373,41 @@ def logPM():
         return redirect(url_for("routes.home"))
     return render_template('logPM.html', title='Evening Log', form1=form1, form2=form2)
 
+@bp.route('/activeflare', methods=['GET', 'POST']) 
+@login_required 
+def activeflare():
+    form = ActiveFlareForm()
+    if request.method == "POST":
+        #Validation
+        flare_valid = form.validate()
+        if flare_valid:
+        #Adding a New Active Flare Record
+            flare_entry = ActiveFlare(
+                user_id = current_user.id,
+                date=form.date.data,
+                overall=form.overall.data,
+                neck=form.neck.data,
+                back=form.back.data,
+                hips=form.hips.data,
+                legs=form.legs.data,
+                fatigue=form.fatigue.data,
+                stiffness=form.stiffness.data,
+                fibrofog=form.fibrofog.data,
+                headache=form.headache.data,
+                dizziness=form.dizziness.data,
+                paraesthesia=form.paraesthesia.data,
+                allodynia=form.allodynia.data,
+                lightsens=form.lightsens.data
+            )
+            # Saving Pain Log to Database
+            db.session.add(flare_entry)
+            
+            #Saving Database Changes
+            db.session.commit()
+
+            flash('Record saved, go rest <3', 'success')
+        return redirect(url_for("routes.home"))
+    return render_template('activeflare.html', title='Flare Up', form=form)
 
 #DAILY ACTIVITY ROUTE
 @bp.route('/activity', methods=['GET', 'POST']) 

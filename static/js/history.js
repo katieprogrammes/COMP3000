@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         tension: 0.3
                     },
                     {
-                        label: 'Allodynia',
+                        label: 'Pain from Touch',
                         data: symptomData.map(log => log.allodynia),
                         borderColor: '#ad0516',
                         hidden: true,

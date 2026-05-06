@@ -14,6 +14,7 @@ app.config.from_object(Config)
 db.init_app(app)
 migrate = Migrate(app, db)
 
+#FLask login initisialisation
 login_manager.init_app(app)
 login_manager.login_view = "routes.login"
 login_manager.login_message_category = "danger"

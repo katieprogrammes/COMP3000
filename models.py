@@ -203,6 +203,21 @@ class Journal(db.Model):
     mood: so.Mapped[Mood] = so.mapped_column(sa.Enum(Mood), nullable=False)
     notes: so.Mapped[str] = so.mapped_column(sa.Text, nullable=False)
 
-
-
+class ActiveFlare(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
+    date: so.Mapped[datetime.date] = so.mapped_column(sa.Date, default=datetime.date.today)
+    overall: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    neck: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    back: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    hips: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    legs: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    fatigue: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    stiffness: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    fibrofog: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    headache: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    dizziness: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    paraesthesia: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    allodynia: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
+    lightsens: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
 

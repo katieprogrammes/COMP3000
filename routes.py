@@ -4,8 +4,8 @@ from flask_login import current_user, login_user, login_required, logout_user
 from flarerisk import get_flarerisk_for_user
 from activitytolerance import get_activity_recommendations
 from activityreccs import apply_flare_weighting
-from models import User, PainAM, SymptomsAM, PainPM, SymptomsPM, Activity, InitialActivity, ActivityPriority, DailyRecommendation
-from forms import RegistrationForm, LoginForm, PainForm, SymptomsForm, InitialActivityForm, ActivityForm, ActivityPriorityForm
+from models import User, PainAM, SymptomsAM, PainPM, SymptomsPM, Activity, InitialActivity, ActivityPriority, DailyRecommendation, Journal, Mood
+from forms import RegistrationForm, LoginForm, PainForm, SymptomsForm, InitialActivityForm, ActivityForm, ActivityPriorityForm, JournalForm
 from extenstions import db, login_manager
 import sqlalchemy as sa
 
@@ -136,6 +136,7 @@ def history():
     symptoms_am_logs = SymptomsAM.query.filter_by(user_id=current_user.id).order_by(SymptomsAM.date.desc()).all()
     symptoms_pm_logs = SymptomsPM.query.filter_by(user_id=current_user.id).order_by(SymptomsPM.date.desc()).all()
     activity_logs = Activity.query.filter_by(user_id=current_user.id).order_by(Activity.date.desc()).all()
+    journal_logs = Journal.query.filter_by(user_id=current_user.id).order_by(Journal.date.desc()).all()
 
     #Combining Pain Logs
     combined_pain_logs = []
@@ -238,7 +239,7 @@ def history():
         })
 
 
-    return render_template("history.html",combined_pain_logs=combined_pain_logs,combined_symptom_logs=combined_symptom_logs,activity_display_logs=activity_display_logs, title="Your History")
+    return render_template("history.html",combined_pain_logs=combined_pain_logs,combined_symptom_logs=combined_symptom_logs,activity_display_logs=activity_display_logs, journal_logs=journal_logs, title="Your History")
 
 
 @bp.route ('/logAM', methods=['GET', 'POST'])
@@ -485,7 +486,7 @@ def journal():
         else:
             flash('Please correct the errors in the form', 'error')
 
-    return render_template('editreginfo.html', form=form, title='Journal')
+    return render_template('journal.html', form=form, title='Journal')
 
 #PLACEHOLDER ROUTE
 @bp.route ('/placeholder')

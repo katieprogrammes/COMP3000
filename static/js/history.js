@@ -357,4 +357,189 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    const activityCtx = document.getElementById('activityChart');
+
+    if (activityCtx) {
+        new Chart(activityCtx, {
+            type: 'line',
+            data: {
+                labels: activityData.map(log => log.date),
+                datasets: [
+                    {
+                        label: 'Shower',
+                        data: activityData.map(log => log.shower),
+                        borderColor: '#8b5cf6',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'cooking',
+                        data: activityData.map(log => log.cooking),
+                        borderColor: '#02bd08',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'laundry',
+                        data: activityData.map(log => log.laundry),
+                        borderColor: '#0502bd',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'vacuuming',
+                        data: activityData.map(log => log.vacuuming),
+                        borderColor: '#3d2116',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'cleaning',
+                        data: activityData.map(log => log.cleaning),
+                        borderColor: '#9402bd',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'groceries',
+                        data: activityData.map(log => log.groceries),
+                        borderColor: '#7d7b01',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'walking',
+                        data: activityData.map(log => log.walking),
+                        borderColor: '#bd6f02',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'driving',
+                        data: activityData.map(log => log.driving),
+                        borderColor: '#666666',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'exercise',
+                        data: activityData.map(log => log.exercise),
+                        borderColor: '#bd027e',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'studying',
+                        data: activityData.map(log => log.studying),
+                        borderColor: '#ad0516',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'socialising',
+                        data: activityData.map(log => log.socialising),
+                        borderColor: '#918151',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Outing',
+                        data: activityData.map(log => log.outing),
+                        borderColor: '#030538',
+                        hidden: true,
+                        borderWidth: 4,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 18,
+                                weight: 700,
+                                family: "Lexend"
+                            },
+                            color: '#000000',
+                            boxWidth: 20,
+                            padding: 20,
+                            
+                            generateLabels: function(chart) {
+                                const labels =
+                                    Chart.defaults.plugins.legend.labels.generateLabels(chart);
+
+                                labels.forEach(label => {
+                                    label.fillStyle = label.strokeStyle;
+                                });
+
+                                return labels;
+                            }
+                            
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date',
+                            color: '#000',
+                            font: {
+                                size: 20,
+                                weight: '700'
+                            }
+                        },
+                        ticks: {
+                            color: '#242424',
+                            font: {
+                                size: 14,
+                                weight: 600
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Difficulty',
+                            color: '#000',
+                            font: {
+                                size: 20,
+                                weight: '700'
+                            }
+                        },
+                        ticks: {
+                            color: '#242424',
+                            font: {
+                                size: 14,
+                                weight: 600
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        },
+                        min: 0,
+                        max: 10
+                    }
+                }
+            }
+        });
+    }
+
 });
+

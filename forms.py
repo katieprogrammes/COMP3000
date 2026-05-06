@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField, RadioField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, DateField, RadioField, TextAreaField
 from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
 import sqlalchemy as sa
 
@@ -103,11 +103,12 @@ class JournalForm(FlaskForm):
         choices=[
             ('happy', 'Happy'),
             ('calm', 'Calm'),
+            ( 'neutral', "Neutral"),
             ('sad', 'Sad'),
             ('angry', 'Angry'),
-            ('upset', 'Upset'),
-            ('depressed', 'Low / Depressed'),
-            ('neutral', 'Netural'),
+            ('anxious', 'Anxious'),
+            ('low', 'Low / Depressed'),
+            ('overwhelmed', 'Overwhelmed')
         ]
     )
     notes = TextAreaField('Notes')

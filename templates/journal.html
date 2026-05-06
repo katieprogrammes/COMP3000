@@ -26,14 +26,52 @@
         <div class="mb-3">
             <h5><label class="form-label">{{ form.mood.label }}</label></h5>
 
-            <div class="btn-group" role="group">
-                {% for subfield in form.mood %}
-                    {{ subfield(class="btn-check") }}
-                    <label class="btn btn-outline-primary" for="{{ subfield.id }}">
-                        {{ subfield.label.text }}
+            {% for subfield in form.mood %}
+                {% set value = subfield._value() %}
+
+                {{ subfield(class="btn-check") }}
+
+                {% if value == "happy" %}
+                    <label class="btn mood-btn mood-happy" for="{{ subfield.id }}">
+                        😊 {{ subfield.label.text }}
                     </label>
-                {% endfor %}
-            </div>
+
+                {% elif value == "calm" %}
+                    <label class="btn mood-btn mood-calm" for="{{ subfield.id }}">
+                        😌 {{ subfield.label.text }}
+                    </label>
+
+                {% elif value == "neutral" %}
+                    <label class="btn mood-btn mood-neutral" for="{{ subfield.id }}">
+                        😐 {{ subfield.label.text }}
+                    </label>
+
+                {% elif value == "sad" %}
+                    <label class="btn mood-btn mood-sad" for="{{ subfield.id }}">
+                        😢 {{ subfield.label.text }}
+                    </label>
+
+                {% elif value == "angry" %}
+                    <label class="btn mood-btn mood-angry" for="{{ subfield.id }}">
+                        😡 {{ subfield.label.text }}
+                    </label>
+
+                {% elif value == "anxious" %}
+                    <label class="btn mood-btn mood-anxious" for="{{ subfield.id }}">
+                        😖 {{ subfield.label.text }}
+                    </label>
+
+                {% elif value == "low" %}
+                    <label class="btn mood-btn mood-low" for="{{ subfield.id }}">
+                        😭 {{ subfield.label.text }}
+                    </label>
+                {% elif value == "overwhelmed" %}
+                    <label class="btn mood-btn mood-overwhelmed" for="{{ subfield.id }}">
+                        😫 {{ subfield.label.text }}
+                    </label>
+                
+                {% endif %}
+            {% endfor %}
         </div>
         <!-- NOTES -->
         <div class="mb-3">

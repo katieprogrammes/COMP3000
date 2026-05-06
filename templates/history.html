@@ -31,6 +31,12 @@
                         Activities
                     </button>
                 </li>
+
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="journal-tab" data-bs-toggle="tab" data-bs-target="#journal" type="button" role="tab">
+                        Journal
+                    </button>
+                </li>
             </ul>
         </div>
     </div>
@@ -181,52 +187,82 @@
 
                 <!--Activities Section-->
                 <div class="tab-pane fade" id="activities" role="tabpanel">
-                    <h3 class="mt-4">Activities History</h3>
+                    <h2 class="text-center">Activity History</h2>
 
-                    <div class="table-responsive mt-3">
-                        <table class="table table-striped table-bordered table-sm historytable">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Shower</th>
-                                    <th>Cooking</th>
-                                    <th>Laundry</th>
-                                    <th>Vacuuming</th>
-                                    <th>Cleaning</th>
-                                    <th>Groceries</th>
-                                    <th>Walking</th>
-                                    <th>Driving</th>
-                                    <th>Exercise</th>
-                                    <th>Studying</th>
-                                    <th>Rested?</th>
-                                    <th>Socialising</th>
-                                    <th>Outing</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for log in activity_display_logs %}
-                                <tr>
-                                    <td>{{ log.date.strftime("%d-%m") }}</td>
-                                    <td class="activity-cell level-{{ log.shower }}">{{ log.shower }}</td>
-                                    <td class="activity-cell level-{{ log.cooking }}">{{ log.cooking }}</td>
-                                    <td class="activity-cell level-{{ log.laundry }}">{{ log.laundry }}</td>
-                                    <td class="activity-cell level-{{ log.vacuuming }}">{{ log.vacuuming }}</td>
-                                    <td class="activity-cell level-{{ log.cleaning }}">{{ log.cleaning }}</td>
-                                    <td class="activity-cell level-{{ log.groceries }}">{{ log.groceries }}</td>
-                                    <td class="activity-cell level-{{ log.walking }}">{{ log.walking }}</td>
-                                    <td class="activity-cell level-{{ log.driving }}">{{ log.driving }}</td>
-                                    <td class="activity-cell level-{{ log.exercise }}">{{ log.exercise }}</td>
-                                    <td class="activity-cell level-{{ log.studying }}">{{ log.studying }}</td>
-                                    <td class="activity-cell level-{{ 1 if log.resting else 10 }}">{{ "Yes" if log.resting else "No" }}</td>
-                                    <td class="activity-cell level-{{ log.socialising }}">{{ log.socialising }}</td>
-                                    <td class="activity-cell level-{{ log.outing }}">{{ log.outing }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                        <div class="mt-4">
-                            <canvas id="activityChart"></canvas>
+                    <div class="text-center">
+                        <button class="btn tableshow"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#activityTableContainer">
+                            Show Table
+                        </button>
+
+                        <button class="btn graphshow"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#activityChartContainer">
+                            Show Graph
+                        </button>
+                    </div>
+
+                    <div class="collapse" id="activityTableContainer">
+                        <div class="table-responsive mt-3">
+                            <table class="table table-striped table-bordered table-sm historytable">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Shower</th>
+                                        <th>Cooking</th>
+                                        <th>Laundry</th>
+                                        <th>Vacuuming</th>
+                                        <th>Cleaning</th>
+                                        <th>Groceries</th>
+                                        <th>Walking</th>
+                                        <th>Driving</th>
+                                        <th>Exercise</th>
+                                        <th>Studying</th>
+                                        <th>Rested?</th>
+                                        <th>Socialising</th>
+                                        <th>Outing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for log in activity_display_logs %}
+                                    <tr>
+                                        <td>{{ log.date.strftime("%d-%m") }}</td>
+                                        <td class="activity-cell level-{{ log.shower }}">{{ log.shower }}</td>
+                                        <td class="activity-cell level-{{ log.cooking }}">{{ log.cooking }}</td>
+                                        <td class="activity-cell level-{{ log.laundry }}">{{ log.laundry }}</td>
+                                        <td class="activity-cell level-{{ log.vacuuming }}">{{ log.vacuuming }}</td>
+                                        <td class="activity-cell level-{{ log.cleaning }}">{{ log.cleaning }}</td>
+                                        <td class="activity-cell level-{{ log.groceries }}">{{ log.groceries }}</td>
+                                        <td class="activity-cell level-{{ log.walking }}">{{ log.walking }}</td>
+                                        <td class="activity-cell level-{{ log.driving }}">{{ log.driving }}</td>
+                                        <td class="activity-cell level-{{ log.exercise }}">{{ log.exercise }}</td>
+                                        <td class="activity-cell level-{{ log.studying }}">{{ log.studying }}</td>
+                                        <td class="activity-cell level-{{ 1 if log.resting else 10 }}">{{ "Yes" if log.resting else "No" }}</td>
+                                        <td class="activity-cell level-{{ log.socialising }}">{{ log.socialising }}</td>
+                                        <td class="activity-cell level-{{ log.outing }}">{{ log.outing }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                         </div>
+                    </div>
+
+                    <div class="collapse" id="activityChartContainer">
+                        <h4 class="text-center">Click the items below to show or hide them</h4>
+                        <canvas id="activityChart"></canvas>
+                    </div>
+                </div>
+
+                <!--Journal Section-->
+                <div class="tab-pane fade" id="journal" role="tabpanel">
+                    <h2 class="text-center">Journal History</h2>
+                    {% for log in journal_logs %}
+                    <div class="entry">
+                        <h4>{{ log.date.strftime("%A, %B %e") }}</h4>
+                        <h2>{{ log.mood.value }}</h2>
+                        <h5>{{ log.notes }}</h5>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -274,8 +310,27 @@ var symptomData = [
     },
     {% endfor %}
 ];
-
-console.log(symptomData);
+</script>
+<script>
+const activityData = [
+    {% for log in activity_display_logs %}
+    {
+        date: "{{ log.date.strftime('%d-%m') }}",
+        shower: {{ log.shower }},
+        cooking: {{ log.cooking }},
+        laundry: {{ log.laundry }},
+        vacuuming: {{ log.vacuuming }},
+        cleaning: {{ log.cleaning }},
+        groceries: {{ log.groceries }},
+        walking: {{ log.walking }},
+        driving: {{ log.driving }},
+        exercise: {{ log.exercise }},
+        studying: {{ log.studying }},
+        socialising: {{ log.socialising }},
+        outing: {{ log.outing }},
+    },
+    {% endfor %}
+];
 </script>
 
 <script src="{{ url_for('static', filename='js/history.js') }}"></script>

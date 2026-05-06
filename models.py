@@ -182,17 +182,19 @@ class DailyRecommendation(db.Model):
     threshold: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     allowed: so.Mapped[list] = so.mapped_column(JSON, nullable=False) 
     avoid: so.Mapped[list] = so.mapped_column(JSON, nullable=False)
+
+    #Relationships
     user: so.Mapped["User"] = so.relationship("User", backref="daily_recommendations")
 
 class Mood(enum.Enum):
-    happy = "happy"
-    calm = "calm"
-    sad = "sad"
-    angry = "angry"
-    anxious = "anxious"
-    upset = "upset"
-    depressed = "depressed"
-    neutral = "neutral"
+    happy = "Happy"
+    calm = "Calm"
+    neutral = "Neutral"
+    sad = "Sad"
+    angry = "Angry"
+    anxious = "Anxious"
+    low = "Low"
+    overwhelmed = "Overwhelmed"
 
 class Journal(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

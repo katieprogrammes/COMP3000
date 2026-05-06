@@ -264,7 +264,7 @@ li {
     background-color: darkred;
     color: lightblue;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
 }
 .tableshow {
     font-weight: 500;
@@ -272,6 +272,21 @@ li {
     background-color: violet;
     color: navy;
     border-radius: 10px;
-    padding: 20px;
+    padding: 10px;
     margin-right:40px;
+}
+.mood-happy { 
+    background-color: #198754; 
+    color: white; 
+}
+.mood-calm { background-color: #0dcaf0; color: black; }
+.mood-neutral { background-color: #6c757d; color: white; }
+.mood-sad { background-color: #0c0d49; color: white;}
+.mood-angry { background-color: #dc3545; }
+.mood-anxious { background-color: #ea6208; }
+.mood-low { background-color: #0f0f18; color: white;}
+.mood-overwhelmed { background-color: #c7bc75; }
+
+.mood-btn {
+    font-size: 1.25rem;
 }

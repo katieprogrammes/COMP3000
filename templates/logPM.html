@@ -15,7 +15,7 @@
             <h5>{{form1.date.label (class="form-label")}} {{form1.date(class="form-control")}}</h5>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <div class="mb-3">
                 <h5><label class="form-label">{{ form1.neck.label }}</label></h5>
                     {% for subfield in form1.neck %}
@@ -212,7 +212,7 @@
             </div>
 
             <!--Symptom Form-->
-            <div class="col">
+            <div class="col text-center">
             {{ form2.hidden_tag() }}
                 <div class="mb-3">
                     <h5><label class="form-label">{{ form2.fatigue.label }}</label></h5>
@@ -407,7 +407,7 @@
                     {% endfor %}
                 </div>
             </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn spoonysubmit">Save</button>
         </form>
     </div>
 </div>

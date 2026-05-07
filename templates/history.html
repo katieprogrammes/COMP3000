@@ -33,8 +33,8 @@
                 </li>
 
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="journal-tab" data-bs-toggle="tab" data-bs-target="#journal" type="button" role="tab">
-                        Journal
+                    <button class="nav-link" id="flare-tab" data-bs-toggle="tab" data-bs-target="#flare" type="button" role="tab">
+                        Flare-Ups
                     </button>
                 </li>
             </ul>
@@ -69,6 +69,8 @@
                                     <tr>
                                         <th>Date</th>
                                         <th>Time</th>
+                                        <th>Overall</th>
+                                        <th>Stress</th>
                                         <th>Neck</th>
                                         <th>Shoulders</th>
                                         <th>Upper Back</th>
@@ -79,7 +81,6 @@
                                         <th>Elbows</th>
                                         <th>Legs</th>
                                         <th>Knees</th>
-                                        <th>Overall</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,6 +88,8 @@
                                     <tr>
                                         <td>{{ log.date.strftime("%d-%m") }}</td>
                                         <td>{{ log.time }}</td>
+                                        <td class="pain-cell level-{{ log.overall }}">{{ log.overall }}</td>
+                                        <td class="pain-cell level-{{ log.stress }}">{{ log.stress }}</td>
                                         <td class="pain-cell level-{{ log.neck }}">{{ log.neck }}</td>
                                         <td class="pain-cell level-{{ log.shoulders }}">{{ log.shoulders }}</td>
                                         <td class="pain-cell level-{{ log.upperback }}">{{ log.upperback }}</td>
@@ -97,7 +100,6 @@
                                         <td class="pain-cell level-{{ log.elbows }}">{{ log.elbows }}</td>
                                         <td class="pain-cell level-{{ log.legs }}">{{ log.legs }}</td>
                                         <td class="pain-cell level-{{ log.knees }}">{{ log.knees }}</td>
-                                        <td class="pain-cell level-{{ log.overall }}">{{ log.overall }}</td>
                                     </tr>
                                     {% endfor %}
                                 </tbody>
@@ -146,7 +148,7 @@
                                         <th>Dizziness</th>
                                         <th>BTR</th>
                                         <th>Touch Sensitivity</th>
-                                        <th>Allodynia</th>
+                                        <th>Pain from Touch</th>
                                         <th>Light Sensitivity</th>
                                         <th>Depression</th>
                                         <th>Anxiety</th>
@@ -254,15 +256,72 @@
                     </div>
                 </div>
 
-                <!--Journal Section-->
-                <div class="tab-pane fade" id="journal" role="tabpanel">
-                    <h2 class="text-center">Journal History</h2>
-                    {% for log in journal_logs %}
-                    <div class="entry">
-                        <h4>{{ log.date.strftime("%A, %B %e") }}</h4>
-                        <h2>{{ log.mood.value }}</h2>
-                        <h5>{{ log.notes }}</h5>
-                        {% endfor %}
+                <!--Flare Section-->
+                <div class="tab-pane fade" id="flare" role="tabpanel">
+                    <h2 class="text-center">Flare-Up History</h2>
+
+                    <div class="text-center">
+                        <button class="btn tableshow"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#flareTableContainer">
+                            Show Table
+                        </button>
+
+                        <button class="btn graphshow"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#flareChartContainer">
+                            Show Graph
+                        </button>
+                    </div>
+
+                    <div class="collapse" id="flareTableContainer">
+                        <div class="table-responsive mt-3">
+                            <table class="table table-striped table-bordered table-sm historytable">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Overall</th>
+                                        <th>Neck</th>
+                                        <th>Back</th>
+                                        <th>Hips</th>
+                                        <th>Legs</th>
+                                        <th>Fatigue</th>
+                                        <th>Stiffness</th>
+                                        <th>Fibro Fog</th>
+                                        <th>Headaches</th>
+                                        <th>Dizziness</th>
+                                        <th>Touch Sens</th>
+                                        <th>Pain Touch</th>
+                                        <th>Light Sens</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for log in flare_display_logs %}
+                                    <tr>
+                                        <td>{{ log.date.strftime("%d-%m") }}</td>
+                                        <td class="pain-cell level-{{ log.overall }}">{{ log.overall }}</td>
+                                        <td class="pain-cell level-{{ log.neck }}">{{ log.neck }}</td>
+                                        <td class="pain-cell level-{{ log.back }}">{{ log.back }}</td>
+                                        <td class="pain-cell level-{{ log.hips }}">{{ log.hips }}</td>
+                                        <td class="pain-cell level-{{ log.legs }}">{{ log.legs }}</td>
+                                        <td class="pain-cell level-{{ log.fatigue }}">{{ log.fatigue }}</td>
+                                        <td class="pain-cell level-{{ log.stiffness }}">{{ log.stiffness }}</td>
+                                        <td class="pain-cell level-{{ log.fibrofog }}">{{ log.fibrofog }}</td>
+                                        <td class="pain-cell level-{{ log.headache }}">{{ log.headache }}</td>
+                                        <td class="pain-cell level-{{ log.dizziness }}">{{ log.dizziness }}</td>
+                                        <td class="pain-cell level-{{ log.paraesthesia }}">{{ log.paraesthesia }}</td>
+                                        <td class="pain-cell level-{{ log.allodynia }}">{{ log.allodynia }}</td>
+                                        <td class="pain-cell level-{{ log.lightsens }}">{{ log.lightsens }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="collapse" id="flareChartContainer">
+                        <h4 class="text-center">Click the items below to show or hide them</h4>
+                        <canvas id="flareChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -275,6 +334,7 @@ const painData = [
     {
         date: "{{ log.date.strftime('%d-%m') }}",
         overall: {{ log.overall }},
+        stress: {{ log.stress }},
         neck: {{ log.neck }},
         shoulders: {{ log.shoulders }},
         upperback: {{ log.upperback }},
@@ -332,6 +392,29 @@ const activityData = [
     {% endfor %}
 ];
 </script>
+
+<script>
+const flareData = [
+    {% for log in flare_display_logs %}
+    {
+        date: "{{ log.date.strftime('%d-%m') }}",
+        overall: {{ log.overall }},
+        neck: {{ log.neck }},
+        back: {{ log.back }},
+        hips: {{ log.hips }},
+        legs: {{ log.legs }},
+        fatigue: {{ log.fatigue }},
+        stiffness: {{ log.stiffness }},
+        fibrofog: {{ log.fibrofog }},
+        dizziness: {{ log.dizziness }},
+        paraesthesia: {{ log.paraesthesia }},
+        allodynia: {{ log.allodynia }},
+        lightsens: {{ log.lightsens }},
+    },
+    {% endfor %}
+];
+</script>
+
 
 <script src="{{ url_for('static', filename='js/history.js') }}"></script>
 {% endblock %}

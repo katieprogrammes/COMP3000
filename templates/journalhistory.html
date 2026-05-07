@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="row">
+    <h1 class="title">Journal History</h1>
+    <div class="col text-center">
+        {% for log in journal_logs %}
+        <div class="histentry">
+            <div class="entryeach">
+                <h4>{{ log.date.strftime("%A, %B %e") }}</h4>
+                {% if log.mood.value == "happy" %}
+                <h2 class="btn mood-btnmood-happy">
+                    😊 Happy
+                </h2>
+
+                {% elif log.mood.value == "calm" %}
+                <h2 class="btn mood-btn mood-calm">
+                    😌 Calm
+                </h2>
+
+                {% elif log.mood.value == "neutral" %}
+                <h2 class="btn mood-btn mood-neutral">
+                    😐 Neutral
+                </h2>
+
+                {% elif log.mood.value == "sad" %}
+                <h2 class="btn mood-btn mood-sad">
+                    😢 Sad
+                </h2>
+
+                {% elif log.mood.value == "angry" %}
+                <h2 class="btn mood-btn mood-angry">
+                    😡 Angry
+                </h2>
+
+                {% elif log.mood.value == "anxious" %}
+                <h2 class="btn mood-btn mood-anxious">
+                    😖 Anxious
+                </h2>
+
+                {% elif log.mood.value == "low" %}
+                <h2 class="btn mood-btn mood-low">
+                    😭 Low/Depressed
+                </h2>
+
+                {% elif log.mood.value == "overwhelmed" %}
+                <h2 class="btn mood-btn mood-overwhelmed">
+                    😫 Overwhelmed
+                </h2>
+                {% endif %}
+            <h5>{{ log.notes }}</h5>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -136,6 +136,7 @@ def history():
     symptoms_am_logs = SymptomsAM.query.filter_by(user_id=current_user.id).order_by(SymptomsAM.date.desc()).all()
     symptoms_pm_logs = SymptomsPM.query.filter_by(user_id=current_user.id).order_by(SymptomsPM.date.desc()).all()
     activity_logs = Activity.query.filter_by(user_id=current_user.id).order_by(Activity.date.desc()).all()
+    flare_logs = ActiveFlare.query.filter_by(user_id=current_user.id).order_by(ActiveFlare.date.desc()).all()
     journal_logs = Journal.query.filter_by(user_id=current_user.id).order_by(Journal.date.desc()).all()
 
     #Combining Pain Logs
@@ -154,7 +155,8 @@ def history():
             "elbows": log.elbows,
             "legs": log.legs,
             "knees": log.knees,
-            "overall": log.overall
+            "overall": log.overall,
+            "stress": log.stress
         })
 
     for log in pain_pm_logs:
@@ -171,7 +173,8 @@ def history():
             "elbows": log.elbows,
             "legs": log.legs,
             "knees": log.knees,
-            "overall": log.overall
+            "overall": log.overall,
+            "stress": log.stress
         })
 
     #Sorting the pain logs by date and time
@@ -238,8 +241,28 @@ def history():
             "outing": log.outing
         })
 
+    #Flare History Logic
+    flare_display_logs = []
+    for log in flare_logs:
+        flare_display_logs.append({
+            "date": log.date,
+            "overall": log.overall,
+            "neck": log.neck,
+            "back": log.back,
+            "hips": log.hips,
+            "legs": log.legs,
+            "fatigue": log.fatigue,
+            "stiffness": log.stiffness,
+            "fibrofog": log.fibrofog,
+            "headache": log.headache,
+            "dizziness": log.dizziness,
+            "paraesthesia": log.paraesthesia,
+            "allodynia": log.allodynia,
+            "lightsens": log.lightsens
+        })
 
-    return render_template("history.html",combined_pain_logs=combined_pain_logs,combined_symptom_logs=combined_symptom_logs,activity_display_logs=activity_display_logs, journal_logs=journal_logs, title="Your History")
+
+    return render_template("history.html",combined_pain_logs=combined_pain_logs,combined_symptom_logs=combined_symptom_logs,activity_display_logs=activity_display_logs, flare_display_logs=flare_display_logs, journal_logs=journal_logs, title="Your History")
 
 
 @bp.route ('/logAM', methods=['GET', 'POST'])
@@ -522,6 +545,14 @@ def journal():
             flash('Please correct the errors in the form', 'error')
 
     return render_template('journal.html', form=form, title='Journal')
+
+@bp.route("/journalhistory")
+@login_required
+def journalhistory():
+    journal_logs = Journal.query.filter_by(user_id=current_user.id).order_by(Journal.date.desc()).all()
+
+    return render_template("journalhistory.html",journal_logs=journal_logs, title="My Diary")
+
 
 #PLACEHOLDER ROUTE
 @bp.route ('/placeholder')

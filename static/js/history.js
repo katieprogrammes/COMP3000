@@ -1,22 +1,34 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const orderedPainData = [...painData].reverse();
+    const orderedSymptomData = [...symptomData].reverse();
+    const orderedActivityData = [...activityData].reverse();
+    const orderedFlareData = [...flareData].reverse();
+
     const painCtx = document.getElementById('painChart');
     
     if (painCtx) {
         new Chart(painCtx, {
             type: 'line',
             data: {
-                labels: painData.map(log => log.date),
+                labels: orderedPainData.map(log => log.date),
                 datasets: [
                     {
                         label: 'Overall Pain',
-                        data: painData.map(log => log.overall),
+                        data: orderedPainData.map(log => log.overall),
                         borderColor: '#ab0d02',
                         borderWidth: 6,
                         tension: 0.3
                     },
                     {
+                        label: 'Stress',
+                        data: orderedPainData.map(log => log.stress),
+                        borderColor: '#c7bc75',
+                        borderWidth: 6,
+                        tension: 0.3
+                    },
+                    {
                         label: 'Neck',
-                        data: painData.map(log => log.neck),
+                        data: orderedPainData.map(log => log.neck),
                         borderColor: '#0502bd',
                         borderWidth: 4,
                         hidden: true,
@@ -24,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Upper Back',
-                        data: painData.map(log => log.upperback),
+                        data: orderedPainData.map(log => log.upperback),
                         borderColor: '#02bd08',
                         borderWidth: 4,
                         hidden: true,
@@ -32,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Lower Back',
-                        data: painData.map(log => log.lowerback),
+                        data: orderedPainData.map(log => log.lowerback),
                         borderColor: '#8b5cf6',
                         borderWidth: 4,
                         hidden: true,
@@ -40,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Chest',
-                        data: painData.map(log => log.chest),
+                        data: orderedPainData.map(log => log.chest),
                         borderColor: '#3d2116',
                         borderWidth: 4,
                         hidden: true,
@@ -48,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Hips',
-                        data: painData.map(log => log.hips),
+                        data: orderedPainData.map(log => log.hips),
                         borderColor: '#9402bd',
                         borderWidth: 4,
                         hidden: true,
@@ -56,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Arms',
-                        data: painData.map(log => log.arms),
+                        data: orderedPainData.map(log => log.arms),
                         borderColor: '#7d7b01',
                         borderWidth: 4,
                         hidden: true,
@@ -64,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Elbows',
-                        data: painData.map(log => log.elbows),
+                        data: orderedPainData.map(log => log.elbows),
                         borderColor: '#bd6f02',
                         borderWidth: 4,
                         hidden: true,
@@ -72,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Legs',
-                        data: painData.map(log => log.legs),
+                        data: orderedPainData.map(log => log.legs),
                         borderColor: '#666666',
                         borderWidth: 4,
                         hidden: true,
@@ -80,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Knees',
-                        data: painData.map(log => log.knees),
+                        data: orderedPainData.map(log => log.knees),
                         borderColor: '#bd027e',
                         borderWidth: 4,
                         hidden: true,
@@ -171,11 +183,11 @@ document.addEventListener('DOMContentLoaded', function () {
         new Chart(symptomCtx, {
             type: 'line',
             data: {
-                labels: symptomData.map(log => log.date),
+                labels: orderedSymptomData.map(log => log.date),
                 datasets: [
                     {
                         label: 'Fatigue',
-                        data: symptomData.map(log => log.fatigue),
+                        data: orderedSymptomData.map(log => log.fatigue),
                         borderColor: '#8b5cf6',
                         hidden: true,
                         borderWidth: 4,
@@ -183,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Stiffness',
-                        data: symptomData.map(log => log.stiffness),
+                        data: orderedSymptomData.map(log => log.stiffness),
                         borderColor: '#02bd08',
                         hidden: true,
                         borderWidth: 4,
@@ -191,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Poor Sleep Quality',
-                        data: symptomData.map(log => log.sleepquality),
+                        data: orderedSymptomData.map(log => log.sleepquality),
                         borderColor: '#0502bd',
                         hidden: true,
                         borderWidth: 4,
@@ -199,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Fibro Fog',
-                        data: symptomData.map(log => log.fibrofog),
+                        data: orderedSymptomData.map(log => log.fibrofog),
                         borderColor: '#3d2116',
                         hidden: true,
                         borderWidth: 4,
@@ -207,7 +219,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Headaches/Migraines',
-                        data: symptomData.map(log => log.headache),
+                        data: orderedSymptomData.map(log => log.headache),
                         borderColor: '#9402bd',
                         hidden: true,
                         borderWidth: 4,
@@ -215,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'IBS',
-                        data: symptomData.map(log => log.ibs),
+                        data: orderedSymptomData.map(log => log.ibs),
                         borderColor: '#7d7b01',
                         hidden: true,
                         borderWidth: 4,
@@ -223,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Dizziness',
-                        data: symptomData.map(log => log.dizziness),
+                        data: orderedSymptomData.map(log => log.dizziness),
                         borderColor: '#bd6f02',
                         hidden: true,
                         borderWidth: 4,
@@ -231,7 +243,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Bad Body Temperature Regulation',
-                        data: symptomData.map(log => log.bodytemp),
+                        data: orderedSymptomData.map(log => log.bodytemp),
                         borderColor: '#666666',
                         hidden: true,
                         borderWidth: 4,
@@ -239,7 +251,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Touch Sensitivity',
-                        data: symptomData.map(log => log.paraesthesia),
+                        data: orderedSymptomData.map(log => log.paraesthesia),
                         borderColor: '#bd027e',
                         hidden: true,
                         borderWidth: 4,
@@ -247,7 +259,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Pain from Touch',
-                        data: symptomData.map(log => log.allodynia),
+                        data: orderedSymptomData.map(log => log.allodynia),
                         borderColor: '#ad0516',
                         hidden: true,
                         borderWidth: 4,
@@ -255,7 +267,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Light Sensitivity',
-                        data: symptomData.map(log => log.lightsens),
+                        data: orderedSymptomData.map(log => log.lightsens),
                         borderColor: '#918151',
                         hidden: true,
                         borderWidth: 4,
@@ -263,7 +275,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Depression',
-                        data: symptomData.map(log => log.depression),
+                        data: orderedSymptomData.map(log => log.depression),
                         borderColor: '#030538',
                         hidden: true,
                         borderWidth: 4,
@@ -271,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Anxiety',
-                        data: symptomData.map(log => log.anxiety),
+                        data: orderedSymptomData.map(log => log.anxiety),
                         borderColor: '#035416',
                         hidden: true,
                         borderWidth: 4,
@@ -363,91 +375,91 @@ document.addEventListener('DOMContentLoaded', function () {
         new Chart(activityCtx, {
             type: 'line',
             data: {
-                labels: activityData.map(log => log.date),
+                labels: orderedActivityData.map(log => log.date),
                 datasets: [
                     {
                         label: 'Shower',
-                        data: activityData.map(log => log.shower),
+                        data: orderedActivityData.map(log => log.shower),
                         borderColor: '#8b5cf6',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'cooking',
-                        data: activityData.map(log => log.cooking),
+                        label: 'Cooking',
+                        data: orderedActivityData.map(log => log.cooking),
                         borderColor: '#02bd08',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'laundry',
-                        data: activityData.map(log => log.laundry),
+                        label: 'Laundry',
+                        data: orderedActivityData.map(log => log.laundry),
                         borderColor: '#0502bd',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'vacuuming',
-                        data: activityData.map(log => log.vacuuming),
+                        label: 'Vacuuming',
+                        data: orderedActivityData.map(log => log.vacuuming),
                         borderColor: '#3d2116',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'cleaning',
-                        data: activityData.map(log => log.cleaning),
+                        label: 'Cleaning',
+                        data: orderedActivityData.map(log => log.cleaning),
                         borderColor: '#9402bd',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'groceries',
-                        data: activityData.map(log => log.groceries),
+                        label: 'Groceries',
+                        data: orderedActivityData.map(log => log.groceries),
                         borderColor: '#7d7b01',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'walking',
-                        data: activityData.map(log => log.walking),
+                        label: 'Walking',
+                        data: orderedActivityData.map(log => log.walking),
                         borderColor: '#bd6f02',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'driving',
-                        data: activityData.map(log => log.driving),
+                        label: 'Driving',
+                        data: orderedActivityData.map(log => log.driving),
                         borderColor: '#666666',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'exercise',
-                        data: activityData.map(log => log.exercise),
+                        label: 'Exercise',
+                        data: orderedActivityData.map(log => log.exercise),
                         borderColor: '#bd027e',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'studying',
-                        data: activityData.map(log => log.studying),
+                        label: 'Studying',
+                        data: orderedActivityData.map(log => log.studying),
                         borderColor: '#ad0516',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3
                     },
                     {
-                        label: 'socialising',
-                        data: activityData.map(log => log.socialising),
+                        label: 'Socialising',
+                        data: orderedActivityData.map(log => log.socialising),
                         borderColor: '#918151',
                         hidden: true,
                         borderWidth: 4,
@@ -455,7 +467,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Outing',
-                        data: activityData.map(log => log.outing),
+                        data: orderedActivityData.map(log => log.outing),
                         borderColor: '#030538',
                         hidden: true,
                         borderWidth: 4,
@@ -517,6 +529,189 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: {
                             display: true,
                             text: 'Difficulty',
+                            color: '#000',
+                            font: {
+                                size: 20,
+                                weight: '700'
+                            }
+                        },
+                        ticks: {
+                            color: '#242424',
+                            font: {
+                                size: 14,
+                                weight: 600
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        },
+                        min: 0,
+                        max: 10
+                    }
+                }
+            }
+        });
+    }
+
+    const flareCtx = document.getElementById('flareChart');
+
+    if (flareCtx) {
+        new Chart(flareCtx, {
+            type: 'line',
+            data: {
+                labels: orderedFlareData.map(log => log.date),
+                datasets: [
+                    {
+                        label: 'Overall Pain',
+                        data: orderedFlareData.map(log => log.overall),
+                        borderColor: '#ab0d02',
+                        borderWidth: 6,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Neck',
+                        data: orderedFlareData.map(log => log.neck),
+                        borderColor: '#0502bd',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Back',
+                        data: orderedFlareData.map(log => log.back),
+                        borderColor: '#02bd08',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Hips',
+                        data: orderedFlareData.map(log => log.hips),
+                        borderColor: '#9402bd',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Legs',
+                        data: orderedFlareData.map(log => log.legs),
+                        borderColor: '#666666',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Fatigue',
+                        data: orderedFlareData.map(log => log.fatigue),
+                        borderColor: '#7d7b01',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Stiffness',
+                        data: orderedFlareData.map(log => log.stiffness),
+                        borderColor: '#bd6f02',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Fibro Fog',
+                        data: orderedFlareData.map(log => log.fibrofog),
+                        borderColor: '#bd027e',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Dizziness',
+                        data: orderedFlareData.map(log => log.dizziness),
+                        borderColor: '#8b5cf6',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Touch Sensivity',
+                        data: orderedFlareData.map(log => log.paraesthesia),
+                        borderColor: '#3d2116',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Pain from Touch',
+                        data: orderedFlareData.map(log => log.allodynia),
+                        borderColor: '#035416',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    },
+                    {
+                        label: 'Light Sensitivity',
+                        data: orderedFlareData.map(log => log.lightsens),
+                        borderColor: '#918151',
+                        borderWidth: 4,
+                        hidden: true,
+                        tension: 0.3
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            font: {
+                                size: 18,
+                                weight: 700,
+                                family: "Lexend"
+                            },
+                            color: '#000000',
+                            boxWidth: 20,
+                            padding: 20,
+                            
+                            generateLabels: function(chart) {
+                                const labels =
+                                    Chart.defaults.plugins.legend.labels.generateLabels(chart);
+
+                                labels.forEach(label => {
+                                    label.fillStyle = label.strokeStyle;
+                                });
+
+                                return labels;
+                            }
+                            
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date',
+                            color: '#000',
+                            font: {
+                                size: 20,
+                                weight: '700'
+                            }
+                        },
+                        ticks: {
+                            color: '#242424',
+                            font: {
+                                size: 14,
+                                weight: 600
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(0, 0, 0, 0.2)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Severity',
                             color: '#000',
                             font: {
                                 size: 20,

@@ -11,7 +11,7 @@
             <h5>{{form.date.label (class="form-label")}} {{form.date(class="form-control")}}</h5>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col actlog">
                 <div class="mb-3">
                 <h5><label class="form-label">{{ form.shower.label }}</label></h5>
                     {% for subfield in form.shower %}
@@ -114,7 +114,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col">
+            <div class="col actlog">
                 <div class="mb-3">
                     <h5><label class="form-label">{{ form.walking.label }}</label></h5>
                     {% for subfield in form.walking %}
@@ -231,7 +231,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn spoonysubmit" id="activitysubmit">Save</button>
             </div>
         </div>
     </form>

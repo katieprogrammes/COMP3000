@@ -5,10 +5,10 @@
     <h1 class="title">More About You</h1>
     <h2 class="subtitle">How hard do you find these daily tasks?</h2>
     <h4 class="subheading">Rate their difficulty from 1 (Fine) to 10 (Extremely Hard) or 0 if Non-Applicable</h4>
-   <form method="POST">
+    <form method="POST">
         {{ form.hidden_tag() }}
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <div class="mb-3">
                 <h5><label class="form-label">{{ form.shower.label }}</label></h5>
                     {% for subfield in form.shower %}
@@ -111,7 +111,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col">
+            <div class="col text-center">
                 <div class="mb-3">
                     <h5><label class="form-label">{{ form.walking.label }}</label></h5>
                     {% for subfield in form.walking %}
@@ -216,7 +216,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+                <button type="submit" class="btn spoonysubmit" id="activitysubmit">Save</button>
             </div>
         </div>
     </form>

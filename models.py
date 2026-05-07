@@ -187,14 +187,14 @@ class DailyRecommendation(db.Model):
     user: so.Mapped["User"] = so.relationship("User", backref="daily_recommendations")
 
 class Mood(enum.Enum):
-    happy = "Happy"
-    calm = "Calm"
-    neutral = "Neutral"
-    sad = "Sad"
-    angry = "Angry"
-    anxious = "Anxious"
-    low = "Low"
-    overwhelmed = "Overwhelmed"
+    happy = "happy"
+    calm = "calm"
+    neutral = "neutral"
+    sad = "sad"
+    angry = "angry"
+    anxious = "anxious"
+    low = "low"
+    overwhelmed = "overwhelmed"
 
 class Journal(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)

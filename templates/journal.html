@@ -6,12 +6,20 @@
 </div>
 <div class="row">
     <div class="col-12 text-center">
-        <h1 class="title">Journal</h1>
-        <h2 class="subtitle">How are you feeling today?</h2>
-        <h4 class="subheading">Select a mood and add any notes you'd like to record</h4>
+        <div class="text-center">
+            <button class="btn tableshow" data-bs-toggle="collapse" data-bs-target="#journalContainer">
+                Add Entry
+            </button>
+            <a class="btn graphshow" href="{{ url_for('routes.journalhistory') }}">
+                See Previous Entries
+            </a>
+        </div>
     </div>
 </div>
 <div class="row">
+    <div class="collapse text-center" id="journalContainer">
+        <h2 class="subtitle">How are you feeling today?</h2>
+        <h4 class="subheading">Select a mood and add any notes you'd like to record</h4>
     <form method="POST">
         {{ form.hidden_tag() }}
 
@@ -81,7 +89,7 @@
             {{ form.notes(class="form-control", rows="5", placeholder="Write anything you want to remember...") }}
         </div>
         <!-- SUBMIT -->
-        <button type="submit" class="btn btn-primary">Save Journal Entry</button>
+        <button type="submit" class="btn spoonysubmit" id="activitysubmit">Save Journal Entry</button>
     </form>
 </div>
 

@@ -44,7 +44,7 @@ class User(db.Model, UserMixin):
     activities = so.relationship("Activity", backref="user", lazy="dynamic") 
     initial_activity = so.relationship("InitialActivity", backref="user", uselist=False)
 
-#Pain Table
+#Morning Pain Table
 class PainAM(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -62,8 +62,7 @@ class PainAM(db.Model):
     overall: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     stress: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
 
-    #Place relationships of tables here
-
+#Evening Pain Table
 class PainPM(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -81,9 +80,7 @@ class PainPM(db.Model):
     overall: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     stress: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
 
-    #Place relationships of tables here
-
-
+#Morning Symptom Table
 class SymptomsAM(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -102,8 +99,7 @@ class SymptomsAM(db.Model):
     depression: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     anxiety: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
 
-    #Place relationships of tables here
-
+#Evening Symptom Table
 class SymptomsPM(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -121,8 +117,7 @@ class SymptomsPM(db.Model):
     depression: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     anxiety: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
 
-    #Place relationships of tables here
-
+#Activity Logging Table
 class Activity(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -140,10 +135,8 @@ class Activity(db.Model):
     resting: so.Mapped[bool] = so.mapped_column(sa.Boolean, nullable=False)
     socialising: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     outing: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
-    #Add more here
 
-    #Place relationships of tables here
-
+#Baseline Activity Difficulty Table
 class InitialActivity(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -159,10 +152,8 @@ class InitialActivity(db.Model):
     studying: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     socialising: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
     outing: so.Mapped[int] = so.mapped_column(sa.Integer, nullable=False)
-    #Add more here
 
-    #Place relationships of tables here
-
+#Activity Priority Table
 class ActivityPriority(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -175,6 +166,7 @@ class ActivityPriority(db.Model):
     groceries: so.Mapped[bool] = so.mapped_column(sa.Boolean, nullable=True)
     studying: so.Mapped[bool] = so.mapped_column(sa.Boolean, nullable=True)
 
+#Daily Activity Recommendation Table
 class DailyRecommendation(db.Model): 
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -186,6 +178,7 @@ class DailyRecommendation(db.Model):
     #Relationships
     user: so.Mapped["User"] = so.relationship("User", backref="daily_recommendations")
 
+#Mood Enum
 class Mood(enum.Enum):
     happy = "happy"
     calm = "calm"
@@ -196,6 +189,7 @@ class Mood(enum.Enum):
     low = "low"
     overwhelmed = "overwhelmed"
 
+#Journal Table
 class Journal(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)
@@ -203,6 +197,7 @@ class Journal(db.Model):
     mood: so.Mapped[Mood] = so.mapped_column(sa.Enum(Mood), nullable=False)
     notes: so.Mapped[str] = so.mapped_column(sa.Text, nullable=False)
 
+#Flare Up Logging Table
 class ActiveFlare(db.Model):
     id: so.Mapped[int] = so.mapped_column(primary_key=True)
     user_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey("user.id"), nullable=False)

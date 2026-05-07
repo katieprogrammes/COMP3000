@@ -2,7 +2,7 @@ from models import InitialActivity
 
 
 def get_activity_recommendations(user_id):
-    #Fetching Activity level from model
+    #Fetching Baseline Activity level from model
     initial = InitialActivity.query.filter_by(user_id=user_id).first()
 
     if not initial:

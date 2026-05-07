@@ -26,14 +26,15 @@ li {
 .dashbtn {
     justify-content: center;
     text-align: center;
-    padding: 40px 0;
+    padding: 30px 0;
 }
 .dashlog {
-    padding: 25px;
+    padding: 20px;
     border-radius: 10px;
     font-weight: 600;
     font-size: 32px;
     text-decoration: none;
+    margin-bottom: 40px;
 }
 @media (max-width: 576px) {
     .dashlog {
@@ -43,18 +44,22 @@ li {
 }
 #dasham {
     background-color: #0000AC;
-    color: lightblue;
+    color: #ADD8E6;
 }
 #dashpm {
     background-color: #1C1945;
-    color: lightblue;
+    color: ADD8E6;
 }
 #dashactivity,
 #acctactdiff {
-    background-color: violet;
+    background-color: #EE82EE;
     color: #1C1945;
 }
-#dashhist,
+#dashhist {
+    background-color: #800080;
+    color: #ADD8E6;
+}
+
 #history {
     background-color: #800080;
     color: #ADD8E6;
@@ -65,7 +70,7 @@ li {
 }
 #homeflare {
     background-color: #8B0000;
-    color: lightblue;
+    color: #ADD8E6;
 }
 .flareup {
     background-color: red;
@@ -254,7 +259,7 @@ li {
 
 .editact {
     background-color: #56144D;
-    color: lightblue;
+    color: #ADD8E6;
     font-weight: 800;
     font-size: 32px;
     text-decoration: none;
@@ -274,8 +279,8 @@ li {
     font-weight: 500;
     font-size: 28px;
     text-decoration: none;
-    background-color: darkred;
-    color: lightblue;
+    background-color: #8B0000;
+    color: #ADD8E6;
     border-radius: 10px;
     padding: 20px;
 }
@@ -283,8 +288,8 @@ li {
     font-weight: 500;
     font-size: 28px;
     text-decoration: none;
-    background-color: darkred;
-    color: lightblue;
+    background-color: 8B0000;
+    color: ADD8E6;
     border-radius: 10px;
     padding: 10px;
     margin: 20px;
@@ -292,7 +297,7 @@ li {
 .tableshow {
     font-weight: 500;
     font-size: 28px;
-    background-color: violet;
+    background-color: #EE82EE;
     color: #1C1945;
     border-radius: 10px;
     padding: 10px;

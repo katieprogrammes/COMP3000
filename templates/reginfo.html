@@ -8,7 +8,7 @@
    <form method="POST">
         {{ form.hidden_tag() }}
         <div class="row">
-            <div class="col">
+            <div class="col text-center">
                 <div class="mb-3">
                 <h5><label class="form-label">{{ form.shower.label }}</label></h5>
                     {% for subfield in form.shower %}
@@ -111,7 +111,7 @@
                     {% endfor %}
                 </div>
             </div>
-            <div class="col">
+            <div class="col text-center">
                 <div class="mb-3">
                     <h5><label class="form-label">{{ form.walking.label }}</label></h5>
                     {% for subfield in form.walking %}
@@ -196,10 +196,6 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col activitybtm">
                 <div class="mb-3">
                     <h5><label class="form-label">{{ form.outing.label }}</label></h5>
                     {% for subfield in form.outing %}
@@ -216,7 +212,12 @@
                         {% endif %}
                     {% endfor %}
                 </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col activitybtm">
+                
+                <button type="submit" class="btn spoonysubmit" id="activitysubmit">Save</button>
             </div>
         </div>
     </form>

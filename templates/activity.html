@@ -185,14 +185,8 @@
 
                 <div class="mb-3">
                     <h5><label class="form-label">{{ form.resting.label }}</label></h5>
-                    <div class="form-check"> 
-                        <input class="form-check-input" type="radio" name="rested" id="restedYes" value="true"> 
-                        <label class="form-check-label" for="restedYes">Yes</label> 
-                    </div> 
-                    <div class="form-check"> 
-                        <input class="form-check-input" type="radio" name="rested" id="restedNo" value="false"> 
-                        <label class="form-check-label" for="restedNo">No</label> 
-                    </div>
+                    {{ form.resting(class="form-check-input") }} 
+                    <p>Tick if Yes</p>
                 </div>
                 
                 <div class="mb-3">

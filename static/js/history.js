@@ -379,99 +379,111 @@ document.addEventListener('DOMContentLoaded', function () {
                 datasets: [
                     {
                         label: 'Shower',
-                        data: orderedActivityData.map(log => log.shower),
+                        data: orderedActivityData.map(log => log.shower === 0 ? null : log.shower),
                         borderColor: '#8b5cf6',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Cooking',
-                        data: orderedActivityData.map(log => log.cooking),
+                        data: orderedActivityData.map(log => log.cooking === 0 ? null : log.cooking),
                         borderColor: '#02bd08',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Laundry',
-                        data: orderedActivityData.map(log => log.laundry),
+                        data: orderedActivityData.map(log => log.laundry === 0 ? null : log.laundry),
                         borderColor: '#0502bd',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Vacuuming',
-                        data: orderedActivityData.map(log => log.vacuuming),
+                        data: orderedActivityData.map(log => log.vacuuming === 0 ? null : log.vacuuming),
                         borderColor: '#3d2116',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Cleaning',
-                        data: orderedActivityData.map(log => log.cleaning),
+                        data: orderedActivityData.map(log => log.cleaning === 0 ? null : log.cleaning),
                         borderColor: '#9402bd',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Groceries',
-                        data: orderedActivityData.map(log => log.groceries),
+                        data: orderedActivityData.map(log => log.groceries === 0 ? null : log.groceries),
                         borderColor: '#7d7b01',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Walking',
-                        data: orderedActivityData.map(log => log.walking),
+                        data: orderedActivityData.map(log => log.walking === 0 ? null : log.walking),
                         borderColor: '#bd6f02',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Driving',
-                        data: orderedActivityData.map(log => log.driving),
+                        data: orderedActivityData.map(log => log.driving === 0 ? null : log.driving),
                         borderColor: '#666666',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Exercise',
-                        data: orderedActivityData.map(log => log.exercise),
+                        data: orderedActivityData.map(log => log.exercise === 0 ? null : log.exercise),
                         borderColor: '#bd027e',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Studying',
-                        data: orderedActivityData.map(log => log.studying),
+                        data: orderedActivityData.map(log => log.studying === 0 ? null : log.studying),
                         borderColor: '#ad0516',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Socialising',
-                        data: orderedActivityData.map(log => log.socialising),
+                        data: orderedActivityData.map(log => log.socialising === 0 ? null : log.socialising),
                         borderColor: '#918151',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     },
                     {
                         label: 'Outing',
-                        data: orderedActivityData.map(log => log.outing),
+                        data: orderedActivityData.map(log => log.outing === 0 ? null : log.outing),
                         borderColor: '#030538',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3
+                        tension: 0.3,
+                        spanGaps: true
                     }
                 ]
             },

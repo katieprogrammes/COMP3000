@@ -125,8 +125,8 @@ def account():
 @bp.route('/logout')
 def logout():
     logout_user()
-    flash('You have been logged out', 'custom-success')
-    return redirect(url_for('home'))
+    flash('You have been logged out', 'success')
+    return redirect(url_for('routes.home'))
 
 @bp.route("/history")
 @login_required
@@ -455,7 +455,7 @@ def activities():
                 driving=form.driving.data,
                 exercise=form.exercise.data,
                 studying=form.studying.data,
-                resting=form.resting.data,
+                resting=bool(form.resting.data),
                 socialising=form.socialising.data,
                 outing=form.outing.data
             )

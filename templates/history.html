@@ -328,6 +328,8 @@
         </div>
     </div>
 </div>
+
+<!--Pain Graph Variable-->
 <script>
 const painData = [
     {% for log in combined_pain_logs %}
@@ -349,6 +351,8 @@ const painData = [
     {% endfor %}
 ];
 </script>
+
+<!--Symptom Graph Variable-->
 <script>
 var symptomData = [
     {% for log in combined_symptom_logs %}
@@ -371,6 +375,8 @@ var symptomData = [
     {% endfor %}
 ];
 </script>
+
+<!--Activity Graph Variable-->
 <script>
 const activityData = [
     {% for log in activity_display_logs %}
@@ -393,6 +399,7 @@ const activityData = [
 ];
 </script>
 
+<!--Flare-Up Graph Variable-->
 <script>
 const flareData = [
     {% for log in flare_display_logs %}

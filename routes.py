@@ -4,7 +4,7 @@ from flask_login import current_user, login_user, login_required, logout_user
 from flarerisk import get_flarerisk_for_user
 from activitytolerance import get_activity_recommendations
 from activityreccs import apply_flare_weighting
-from activity_adaptive import update_activity_difficulty
+from activityadaptive import update_activity_difficulty
 from models import User, PainAM, SymptomsAM, PainPM, SymptomsPM, Activity, InitialActivity, ActivityPriority, DailyRecommendation, Journal, Mood, ActiveFlare
 from forms import RegistrationForm, LoginForm, PainForm, SymptomsForm, InitialActivityForm, ActivityForm, ActivityPriorityForm, JournalForm, ActiveFlareForm
 from extenstions import db, login_manager

@@ -187,6 +187,12 @@ li {
 #activitysubmit {
     border-radius: 10px;
 }
+#flaresubmit {
+    padding: 20px 40px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 40px;
+}
 .actlog {
     display: flex;
     flex-direction: column;

@@ -14,8 +14,10 @@
             <h5>{{form.date.label (class="form-label")}} {{form.date(class="form-control")}}</h5>
         </div>
         <div class="row">
-            <div class="col">
-                <div class="mb-3">
+            <div class="col text-center">
+                <h3>Pain</h3>
+                <br>
+                <div class="mb-3"> 
                     <h5><label class="form-label">{{ form.overall.label }}</label></h5>
                     {% for subfield in form.overall %}
                         {% set value = subfield._value() %}
@@ -101,8 +103,9 @@
                 </div>
             </div>
             <!--Symptom Form-->
-            <div class="col">
-            {{ form.hidden_tag() }}
+            <div class="col text-center">
+                <h3>Symptoms</h3>
+                <br>
                 <div class="mb-3">
                     <h5><label class="form-label">{{ form.fatigue.label }}</label></h5>
                     {% for subfield in form.fatigue %}
@@ -234,7 +237,9 @@
                     {% endfor %}
                 </div>
             </div>
-                <button type="submit" class="btn btn-primary">Save</button>
+            <div class="text-center">
+                <button type="submit" class="btn spoonysubmit" id="flaresubmit">Save</button>
+            </div>
         </form>
     </div>
 </div>

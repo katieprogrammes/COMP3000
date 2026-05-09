@@ -6,7 +6,7 @@ from activitytolerance import get_activity_recommendations
 from activityreccs import apply_flare_weighting
 from activityadaptive import update_activity_difficulty
 from models import User, PainAM, SymptomsAM, PainPM, SymptomsPM, Activity, InitialActivity, ActivityPriority, DailyRecommendation, Journal, Mood, ActiveFlare
-from forms import RegistrationForm, LoginForm, PainForm, SymptomsForm, InitialActivityForm, ActivityForm, ActivityPriorityForm, JournalForm, ActiveFlareForm
+from forms import RegistrationForm, LoginForm, PainForm, SymptomsFormAM, SymptomsFormPM, InitialActivityForm, ActivityForm, ActivityPriorityForm, JournalForm, ActiveFlareForm
 from extenstions import db, login_manager
 import sqlalchemy as sa
 
@@ -45,18 +45,18 @@ def flarerisk():
         not_applicable=weighted_recs["not_applicable"]
     )
 
-#REGISTRATION PAGE
+#Registration Page
 @bp.route ('/register', methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
-    # Add User to Table
+    #Add User to Table
     if form.validate_on_submit():
-        # Check if Email is Already in Use
+        #Check if Email is Already in Use
         existing_user = User.query.filter_by(email=form.email.data).first()
         if existing_user:
             flash('Email is already in use. Please choose a different one.', 'error')
 
-        # Check if Passwords Match
+        #Check if Passwords Match
         elif form.password.data != form.password2.data:
             flash('Passwords do not match. Please try again.', 'error')
 
@@ -71,13 +71,14 @@ def register():
         
     return render_template('register.html', title='Register', form=form)
 
+#Baseline Activity Difficulty Page
 @bp.route('/reginit', methods=['GET', 'POST'])
 @login_required
 def reginit():
     form = InitialActivityForm()
 
     if form.validate_on_submit():
-        # Validation
+        #Validation
         initact = InitialActivity(
             user_id=current_user.id,
             shower=int(form.shower.data),
@@ -94,7 +95,7 @@ def reginit():
             outing=int(form.outing.data),
         )
 
-        # Saving Log to Database
+        #Saving Log to Database
         db.session.add(initact)
         db.session.commit()
         flash('Congratulations, you are now a registered user!', 'success')
@@ -102,7 +103,7 @@ def reginit():
 
     return render_template('reginfo.html', title='Rate Activities', form=form)
 
-
+#Login Page
 @bp.route('/login', methods=['GET', 'POST']) 
 def login(): 
     if current_user.is_authenticated: 
@@ -129,6 +130,7 @@ def logout():
     flash('You have been logged out', 'success')
     return redirect(url_for('routes.home'))
 
+#History Page
 @bp.route("/history")
 @login_required
 def history():
@@ -270,7 +272,7 @@ def history():
 @login_required
 def logAM():
     form1 = PainForm()
-    form2 = SymptomsForm()
+    form2 = SymptomsFormAM()
     form3 = ActivityPriorityForm()
     if request.method == "POST":
         #Validation
@@ -295,7 +297,7 @@ def logAM():
                 stress=int(form1.stress.data)
             )
 
-            # Saving Pain Log to Database
+            #Saving Pain Log to Database
             db.session.add(pain_entry)
 
             #Adding a New Symptom Record
@@ -316,7 +318,7 @@ def logAM():
                 depression=form2.depression.data,
                 anxiety=form2.anxiety.data
             )
-            # Saving Symptom Log to Database
+            #Saving Symptom Log to Database
             db.session.add(symptom_entry)
 
             activity_priority = ActivityPriority(
@@ -344,7 +346,7 @@ def logAM():
 @login_required
 def logPM():
     form1 = PainForm()
-    form2 = SymptomsForm()
+    form2 = SymptomsFormPM()
     if request.method == "POST":
         #Validation
         pain_valid = form1.validate()
@@ -365,9 +367,10 @@ def logPM():
                 legs=int(form1.legs.data),
                 knees=int(form1.knees.data),
                 overall=int(form1.overall.data),
+                stress=int(form1.stress.data),
             )
 
-            # Saving Pain Log to Database
+            #Saving Pain Log to Database
             db.session.add(pain_entry)
 
             #Adding a New Symptom Record
@@ -387,13 +390,13 @@ def logPM():
                 depression=form2.depression.data,
                 anxiety=form2.anxiety.data
             )
-            # Saving Pain Log to Database
+            #Saving Pain Log to Database
             db.session.add(symptom_entry)
             
             #Saving Database Changes
             db.session.commit()
 
-        flash('Pain record saved successfully', 'success')
+        flash('Log saved successfully', 'success')
         return redirect(url_for("routes.home"))
     return render_template('logPM.html', title='Evening Log', form1=form1, form2=form2)
 
@@ -423,7 +426,7 @@ def activeflare():
                 allodynia=form.allodynia.data,
                 lightsens=form.lightsens.data
             )
-            # Saving Pain Log to Database
+            #Saving Pain Log to Database
             db.session.add(flare_entry)
             
             #Saving Database Changes
@@ -485,7 +488,7 @@ def activity_recommendations():
 def edit_activities():
     initial = InitialActivity.query.filter_by(user_id=current_user.id).first()
 
-    # Prefill form with existing values
+    #Prefill form with existing values
     form = InitialActivityForm(
         shower=initial.shower,
         cooking=initial.cooking,
@@ -529,7 +532,7 @@ def journal():
     form = JournalForm()
 
     if request.method == "POST":
-        # Validation
+        #Validation
         if form.validate():
             journal_entry = Journal(
                 user_id=current_user.id,
@@ -538,7 +541,7 @@ def journal():
                 notes=form.notes.data
             )
 
-            # Save to DB
+            #Save to DB
             db.session.add(journal_entry)
             db.session.commit()
 
@@ -556,9 +559,3 @@ def journalhistory():
     journal_logs = Journal.query.filter_by(user_id=current_user.id).order_by(Journal.date.desc()).all()
 
     return render_template("journalhistory.html",journal_logs=journal_logs, title="My Diary")
-
-
-#PLACEHOLDER ROUTE
-@bp.route ('/placeholder')
-def placeholder():
-    return render_template('placeholder.html', title='Placeholder')

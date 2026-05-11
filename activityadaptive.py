@@ -1,5 +1,3 @@
-# activity_adaptive.py
-
 from models import Activity, InitialActivity
 
 #How many times an activity is reported as 8 or avoce before increasing difficulty
@@ -39,6 +37,6 @@ def update_activity_difficulty(user_id):
             new_value = min(current + LEARNING_RATE, 10)
             setattr(difficulty, field, new_value)
 
-
+    #Save to table
     from app import db
     db.session.commit()

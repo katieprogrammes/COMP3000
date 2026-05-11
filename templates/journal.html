@@ -4,6 +4,7 @@
 <div class="row">
     <h1 class="title">Journal</h1>
 </div>
+<!--Button options to add or review entires-->
 <div class="row">
     <div class="col-12 text-center">
         <div class="text-center">
@@ -16,6 +17,8 @@
         </div>
     </div>
 </div>
+
+<!--Add Entry-->
 <div class="row">
     <div class="collapse text-center" id="journalContainer">
         <h2 class="subtitle">How are you feeling today?</h2>
@@ -23,7 +26,7 @@
     <form method="POST">
         {{ form.hidden_tag() }}
 
-        <!-- DATE -->
+        <!--Date-->
         <div class="mb-3">
             <h5>
                 {{ form.date.label(class="form-label") }}
@@ -31,7 +34,7 @@
             </h5>
         </div>
         
-        <!-- MOOD BUTTONS -->
+        <!--Mood Buttons-->
         <div class="mb-3">
             <h5><label class="form-label">{{ form.mood.label }}</label></h5>
 
@@ -82,24 +85,16 @@
                 {% endif %}
             {% endfor %}
         </div>
-        <!-- NOTES -->
+        <!--Notes-->
         <div class="mb-3">
             <h5>
                 {{ form.notes.label(class="form-label") }}
             </h5>
-            {{ form.notes(class="form-control", rows="5", placeholder="Write anything you want to remember...") }}
+            {{ form.notes(class="form-control", rows="8", placeholder="Write anything you want to remember") }}
         </div>
-        <!-- SUBMIT -->
+        <!--Submit-->
         <button type="submit" class="btn spoonysubmit" id="activitysubmit">Save Journal Entry</button>
     </form>
 </div>
-
-
-
-
-
-
-
-
 
 {% endblock %}

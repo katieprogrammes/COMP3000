@@ -101,7 +101,8 @@ li {
     padding-top: 40px;
     text-align: center;
 }
-.form-group input {
+.form-group input,
+.form-control {
     background-color: #ADD8E6;
 }
 .loginbtn,

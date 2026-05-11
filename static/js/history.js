@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const painCtx = document.getElementById('painChart');
     
+
     if (painCtx) {
         new Chart(painCtx, {
             type: 'line',
@@ -187,22 +188,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 datasets: [
                     {
                         label: 'Fatigue',
-                        data: orderedSymptomData.map(log => log.fatigue === 0 ? null : log.fatigue),
+                        data: orderedSymptomData.map(log => log.fatigue),
                         borderColor: '#8b5cf6',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Stiffness',
-                        data: orderedSymptomData.map(log => log.stiffness === 0 ? null : log.stiffness),
+                        data: orderedSymptomData.map(log => log.stiffness),
                         borderColor: '#02bd08',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
+                    //Skips null values
                     {
                         label: 'Poor Sleep Quality',
                         data: orderedSymptomData.map(log => log.sleepquality === 0 ? null : log.sleepquality),
@@ -214,93 +214,83 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     {
                         label: 'Fibro Fog',
-                        data: orderedSymptomData.map(log => log.fibrofog === 0 ? null : log.fibrofog),
+                        data: orderedSymptomData.map(log => log.fibrofog),
                         borderColor: '#3d2116',
                         hidden: true,
                         borderWidth: 4,
                         tension: 0.3,
-                        spanGaps: true
                     },
                     {
                         label: 'Headaches/Migraines',
-                        data: orderedSymptomData.map(log => log.headache === 0 ? null : log.headache),
+                        data: orderedSymptomData.map(log => log.headache),
                         borderColor: '#9402bd',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'IBS',
-                        data: orderedSymptomData.map(log => log.ibs === 0 ? null : log.ibs),
+                        data: orderedSymptomData.map(log => log.ibs),
                         borderColor: '#7d7b01',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Dizziness',
-                        data: orderedSymptomData.map(log => log.dizziness === 0 ? null : log.dizziness),
+                        data: orderedSymptomData.map(log => log.dizziness),
                         borderColor: '#bd6f02',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Bad Body Temperature Regulation',
-                        data: orderedSymptomData.map(log => log.bodytemp === 0 ? null : log.bodytemp),
+                        data: orderedSymptomData.map(log => log.bodytemp),
                         borderColor: '#666666',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Touch Sensitivity',
-                        data: orderedSymptomData.map(log => log.paraesthesia === 0 ? null : log.paraesthesia),
+                        data: orderedSymptomData.map(log => log.paraesthesia),
                         borderColor: '#bd027e',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Pain from Touch',
-                        data: orderedSymptomData.map(log => log.allodynia === 0 ? null : log.allodynia),
+                        data: orderedSymptomData.map(log => log.allodynia),
                         borderColor: '#ad0516',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Light Sensitivity',
-                        data: orderedSymptomData.map(log => log.lightsens === 0 ? null : log.lightsens),
+                        data: orderedSymptomData.map(log => log.lightsens),
                         borderColor: '#918151',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Depression',
-                        data: orderedSymptomData.map(log => log.depression === 0 ? null : log.depression),
+                        data: orderedSymptomData.map(log => log.depression),
                         borderColor: '#030538',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     },
                     {
                         label: 'Anxiety',
-                        data: orderedSymptomData.map(log => log.anxiety === 0 ? null : log.anxiety),
+                        data: orderedSymptomData.map(log => log.anxiety),
                         borderColor: '#035416',
                         hidden: true,
                         borderWidth: 4,
-                        tension: 0.3,
-                        spanGaps: true
+                        tension: 0.3
                     }
                 ]
             },

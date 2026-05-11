@@ -15,6 +15,7 @@
             <h5>{{form1.date.label (class="form-label")}} {{form1.date(class="form-control")}}</h5>
         </div>
         <div class="row">
+            <!--Pain Form-->
             <div class="col text-center">
                 <h3>Pain</h3>
                 <br>
@@ -428,6 +429,7 @@
                         {% endif %}
                     {% endfor %}
                 </div>
+                <!--Activity Priority-->
             </div>
             <h4 class="subheading">Any Activities that Need Prioritising Today?</h4>
             <div class="priority">
@@ -453,6 +455,7 @@
                 {{ form3.studying(class="btn-check", id="studying-btn") }}
                 <label class="btn btn-outline-success" for="studying-btn">Studying</label>
             </div>
+            <!--Submit-->
             <button type="submit" class="btn spoonysubmit">Save</button>
         </form>
     </div>

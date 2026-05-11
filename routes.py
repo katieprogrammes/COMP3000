@@ -396,7 +396,7 @@ def logPM():
             #Saving Database Changes
             db.session.commit()
 
-        flash('Log saved successfully', 'success')
+        flash('Record saved successfully, sleep well', 'success')
         return redirect(url_for("routes.home"))
     return render_template('logPM.html', title='Evening Log', form1=form1, form2=form2)
 
